@@ -1,7 +1,7 @@
 import cv2
 from multi_screen import MultiScreen
 
-multiscreen = MultiScreen([(1280, 720), (1280, 720)])
+multiscreen = MultiScreen([0, 2], [(160, 120), (160, 120)])
 multiscreen.start_all()
 
 while True:

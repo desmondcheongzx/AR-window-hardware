@@ -1,17 +1,18 @@
 import cv2
 from video_capture import VideoCaptureAsync
+#from multi_capture import VideoCaptureAsync
 
 
 class MultiScreen():
-    def __init__(self, screen_dimensions):
+    def __init__(self, sources, screen_dimensions):
         self.n_cameras = len(screen_dimensions)
         self.screen_dimensions = screen_dimensions
         self.video_captures = [
-            VideoCaptureAsync(src=i,
+            VideoCaptureAsync(src=idx,
                               width=screen_width,
                               height=screen_height)
-            for i, (screen_width, screen_height)
-            in enumerate(screen_dimensions)]
+            for idx, (screen_width, screen_height)
+            in zip(sources, screen_dimensions)]
         self.window_ids = [f'screen{i}'
                            for i in range(self.n_cameras)]
 
@@ -19,7 +20,7 @@ class MultiScreen():
         for i, window_id in enumerate(self.window_ids):
             cv2.namedWindow(window_id, cv2.WND_PROP_FULLSCREEN)
             cv2.moveWindow(window_id, x_displacement, 0)
-            cv2.setWindowProperty(window_id, cv2.WND_PROP_FULLSCREEN, 1)
+            cv2.setWindowProperty(window_id, cv2.WND_PROP_FULLSCREEN, 0)
             x_displacement += self.screen_dimensions[i][0]
 
     def start_all(self):
@@ -34,7 +35,6 @@ class MultiScreen():
 
     def set_frames(self, data, all_sources=True, src=None):
         # Remember to check that there's enough data sources!
-
         if not all_sources:
             for frame, idx in zip(data, src):
                 cv2.imshow(self.window_ids[idx], frame)
