@@ -402,7 +402,6 @@ int get_gesture_event(uint8_t *data)
         break;
         default:
         good_gesture = 0;
-        printf("Unknown gesture");
         // printf("Gesture value : %d\n",gesture);
         break;
     }
