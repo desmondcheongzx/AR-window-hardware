@@ -1,5 +1,4 @@
 import cv2
-import threading
 from video_capture import VideoCaptureAsync
 
 
@@ -34,14 +33,14 @@ class MultiScreen():
     def set_frames(self, data, all_sources=True, src=None):
         if not all_sources:
             for frame, idx in zip(data, src):
-                (screen_width, 
+                (screen_width,
                     screen_height) = self.screen_dimensions[idx]
                 resized_frame = cv2.resize(
                     frame, (screen_width, screen_height))
                 cv2.imshow(self.window_ids[idx], resized_frame)
             return
         for frame, (width, height), window_id in zip(
-            data, self.screen_dimensions, self.window_ids):
+                data, self.screen_dimensions, self.window_ids):
             resized_frame = cv2.resize(
                 frame, (width, height))
             cv2.imshow(window_id, resized_frame)
