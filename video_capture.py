@@ -3,7 +3,8 @@ import threading
 
 
 class VideoCaptureAsync:
-    def __init__(self, src=0, width=640, height=480, driver=None):
+    def __init__(self, src=0, width=480, height=360, 
+        driver=None):
         self.src = src
         if not driver:
             self.cap = cv2.VideoCapture(self.src)
