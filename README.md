@@ -12,3 +12,5 @@ Before using the gesture module, be sure to first compile the code for interfaci
 ```
 make clean && make
 ```
+## Notes and Credits
+Code for the gesture capture interface was adapted from [Seeed Studio](https://github.com/Seeed-Studio/Seeed_Linux_mgc3x30) under [The MIT License](https://opensource.org/licenses/mit-license.php).
